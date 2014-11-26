@@ -1,4 +1,4 @@
-polymer-build-samples
+polymer-plus-samples
 =====================
 
 Polymer integration samples
