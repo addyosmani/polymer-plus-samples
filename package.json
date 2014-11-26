@@ -1,0 +1,23 @@
+{
+  "name": "polymer-plus-samples",
+  "version": "1.0.0",
+  "description": "Polymer integration samples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/addyosmani/polymer-build-samples"
+  },
+  "keywords": [
+    "polymer",
+    "samples"
+  ],
+  "author": "Addy Osmani",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/addyosmani/polymer-build-samples/issues"
+  },
+  "homepage": "https://github.com/addyosmani/polymer-build-samples"
+}

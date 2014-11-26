@@ -1,0 +1,13 @@
+{
+  "name": "swipeable-card",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#0.5.1",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#0.5.1-1",
+    "traceur": "~0.0.74",
+    "es6-module-loader": "~0.10.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "0.5.1-1"
+  }
+}
