@@ -1,0 +1,8 @@
+{
+  "name": "swipeable-card",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#0.8-preview",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#0.5.1-1"
+  }
+}

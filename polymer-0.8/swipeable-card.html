@@ -1,0 +1,125 @@
+<link rel="import" href="components/polymer/polymer.html">
+<link rel="import" href="components/polymer/src/more-features/gestures.html">
+
+<style>
+swipeable-card {
+    display: block;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.098) 0px 2px 4px, rgba(0, 0, 0, 0.098) 0px 0px 3px;
+    transition: 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition-property: opacity, -webkit-transform;
+    transition-property: opacity, transform;
+}
+</style>
+<script>
+/*
+Open questions
+
+What is replacing eventDelegates?
+Where can we get the WIP gesture system replacement?
+this.fire is now..?
+ */
+Polymer({
+
+    name: 'swipeable-card',
+
+    published: {
+        user: String,
+        disableSwipe: Boolean,
+        swiped: Boolean,
+        noCurve: Boolean,
+        offsetRatio: Number,
+        widthRatio: Boolean
+    },
+/*
+   eventDelegates: {
+      webkitTransitionEnd: 'transitionEnd',
+      transitionend: 'transitionEnd',
+      trackstart: 'trackStart',
+      trackx: 'trackx',
+      trackend: 'trackEnd'
+    },
+ */  
+    created: function() {
+        this.innerHTML = 'Hello World, my user is ' + (this.user || 'nobody') + '.';
+
+        // Defaults
+        this.swiped = false;
+        this.noCurve = false;
+        this.offsetRatio = 0.2;
+        this.widthRatio = 3;
+        this.disableSwipe = false;
+    },
+
+    animate: function(x) {
+        var s = this.style;
+        var d = x > 0 ? 1 : -1;
+        var w = this._w * this.widthRatio;
+        var x1 = Math.max(0, Math.abs(x) - this._w * this.offsetRatio);
+        var r = Math.max(0, (w - x1) / w);
+        var y = w - Math.sqrt(w * w - x1 * x1);
+        var deg = (1 - r) * d * 90;
+        s.opacity = r;
+        var translate = 'translate3d(' + x + 'px,' +
+            (this.noCurve ? 0 : y) + 'px,0)';
+        var rotate = 'rotate(' + deg + 'deg)';
+        s.transform = s.webkitTransform =
+            translate + (this.noCurve ? '' : ' ' + rotate);
+    },
+
+    trackStart: function(e) {
+        if (!this.disableSwipe) {
+            e.preventTap();
+            this._w = this.offsetWidth;
+            this.classList.add('dragging');
+        }
+    },
+
+    trackx: function(e) {
+        if (!this.disableSwipe) {
+            this.animate(e.dx);
+        }
+    },
+
+    trackEnd: function(e) {
+        if (!this.disableSwipe) {
+            this.swipeEnd(Math.abs(e.dx) > this._w / 2 && e.dx * e.xDirection > 0,
+                e.dx > 0);
+        }
+    },
+
+    swipeEnd: function(away, dir) {
+        this.classList.remove('dragging');
+        this.away = away;
+        this.direction = dir ? 'right' : 'left';
+        if (away) {
+            var w = this._w * this.widthRatio;
+            this.animate(dir ? w : -w);
+        } else {
+            this.animate(0);
+        }
+    },
+
+    transitionEnd: function(e) {
+    	console.log(e);
+        if (this.away && e.propertyName == 'opacity') {
+            this.fire('swipeable-card-swipe-away', {
+                direction: this.direction
+            });
+            this.swiped = true;
+        }
+        e.stopPropagation();
+    },
+
+    swipedChanged: function() {
+        if (this.away != this.swiped) {
+            this.away = this.swiped;
+            this.classList.add('dragging');
+            this._w = this.offsetWidth;
+            this.animate(this.swiped ? this._w * this.widthRatio : 0);
+        }
+    }
+
+});
+</script>
