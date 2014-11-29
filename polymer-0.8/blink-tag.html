@@ -1,0 +1,38 @@
+<link rel="import" href="components/polymer/polymer.html">
+
+<style>
+  .animation {
+    -webkit-animation: blink 1s cubic-bezier(1.0,0,0,1.0) infinite 1s;
+  }
+  @keyframes blink {  
+      0% { color: white; }
+      100% { color: black; }
+  }
+  @-webkit-keyframes blink {
+      0% { color: white; }
+      100% { color: black; }
+  }
+  blink {
+      -webkit-animation: blink 1s linear infinite;
+      -moz-animation: blink 1s linear infinite;
+      -ms-animation: blink 1s linear infinite;
+      -o-animation: blink 1s linear infinite;
+      animation: blink 1s linear infinite;
+      margin:0 auto;
+      font-weight: bold;
+  } 
+</style>
+<script>
+Polymer({
+    name: 'blink-tag',
+    published: {
+        text: String
+    },
+    created: function() {
+        if (this.text) {
+          this.innerHTML = '<div class="animation">' + this.text + '</div>';   
+        }
+    }
+
+});
+</script>
