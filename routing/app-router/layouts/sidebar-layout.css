@@ -1,0 +1,32 @@
+
+/** main content */
+:host /deep/ core-header-panel[main] {
+  background-color: background-color: #ECECEC;
+}
+.content {
+  padding: 20px;
+}
+
+:host /deep/ core-drawer-panel core-toolbar {
+	background-color: #4285F4;
+}
+
+/** sidebar */
+core-header-panel core-toolbar {
+	background-color: #DDDDDD;
+}
+core-header-panel core-item {
+  padding: 2px 12px;
+  line-height: 40px;
+}
+core-header-panel  core-item:not(:first-of-type) {
+  border-top: 1px solid #f5f5f5;
+}
+core-header-panel core-item:hover,
+core-header-panel core-item:focus {
+  background-color: #fcfcfc;
+  color: #222;
+}
+core-header-panel core-item[active] {
+  border-right: 6px solid #f5f5f5;
+}

@@ -1,0 +1,27 @@
+<link rel="import" href="/components/polymer/polymer.html">
+<link rel="import" href="/components/core-scaffold/core-scaffold.html">
+<link rel="import" href="/components/core-header-panel/core-header-panel.html">
+<link rel="import" href="/components/core-toolbar/core-toolbar.html">
+<link rel="import" href="/components/core-item/core-item.html">
+<link rel="import" href="/components/pushstate-anchor/src/pushstate-anchor.html">
+
+<polymer-element name="sidebar-layout" attributes="selected" noscript>
+  <template>
+    <link rel="stylesheet" href="sidebar-layout.css">
+    <core-scaffold>
+      <core-header-panel navigation flex mode="seamed">
+        <core-toolbar>app-router</core-toolbar>
+        <core-item icon="home" label="Home" active?="{{selected == 'home'}}"><a is="pushstate-anchor" href="/"></a></core-item>
+        <core-item icon="polymer" label="Data Binding" active?="{{selected == 'demo'}}"><a is="pushstate-anchor" href="/demo/1337?queryParam1=Routing%20with%20Web%20Components!"></a></core-item>
+        <core-item icon="info-outline" label="Notes" active?="{{selected == 'notes'}}"><a is="pushstate-anchor" href="/notes"></a></core-item>
+        <core-item icon="exit-to-app" label="GitHub"><a href="https://github.com/"></a></core-item>
+      </core-header-panel>
+      <div tool>
+        <content select=".title"></content>
+      </div>
+      <div class="content">
+        <content></content>
+      </div>
+    </core-scaffold>
+  </template>
+</polymer-element>
